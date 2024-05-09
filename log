@@ -4,3 +4,25 @@ Thu 09 May 2024 08:47:09 PM UTC:
  tests:  4|7
 total_score: 5/70
 9685bee
+Thu 09 May 2024 08:51:46 PM UTC: 
+ treemap.c | 26 +++++++++++++++++++++++++-
+ 1 file changed, 25 insertions(+), 1 deletion(-)
+In file included from test.c:4:
+treemap.c: In function ‘insertTreeMap’:
+treemap.c:59:13: error: variable ‘parent’ set but not used [-Werror=unused-but-set-variable]
+   59 |   TreeNode *parent = NULL;
+      |             ^~~~~~
+cc1: all warnings being treated as errors
+Compilation failed
+cd312fd
+Thu 09 May 2024 08:52:20 PM UTC: 
+ treemap.c | 1 -
+ 1 file changed, 1 deletion(-)
+In file included from test.c:4:
+treemap.c: In function ‘insertTreeMap’:
+treemap.c:60:5: error: ‘parent’ undeclared (first use in this function)
+   60 |     parent = aux;
+      |     ^~~~~~
+treemap.c:60:5: note: each undeclared identifier is reported only once for each function it appears in
+Compilation failed
+cd312fd
