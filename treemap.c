@@ -129,8 +129,24 @@ Pair *searchTreeMap(TreeMap *tree, void *key) {
   return NULL;
 }
 
-Pair *upperBound(TreeMap *tree, void *key) { return NULL; }
+Pair *upperBound(TreeMap *tree, void *key) {
+  TreeNode *aux = tree->root;
+  TreeNode *ub = NULL;
+  while (aux != NULL){
+    if (tree->lower_than(key, aux->pair->key)){
+      aux = aux->left;
+      
+    }
+    
+  }
+  return NULL;
+}
 
-Pair *firstTreeMap(TreeMap *tree) { return NULL; }
+Pair *firstTreeMap(TreeMap *tree) { 
+  TreeNode *aux = minimum(tree->root);
+  tree->current = aux;
+  return aux->pair;
+  
+}
 
 Pair *nextTreeMap(TreeMap *tree) { return NULL; }
