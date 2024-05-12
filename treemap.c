@@ -106,8 +106,6 @@ void removeNode(TreeMap *tree, TreeNode *node) {
       }
       
     }
-    free(node->pair->key);
-    free(node->pair->value);
 
   }
   else{
@@ -135,9 +133,6 @@ void removeNode(TreeMap *tree, TreeNode *node) {
         
       }
       child->parent = node->parent;
-      free(node->pair->key);
-      free(node->pair->value);
-      
     }
     
   }
