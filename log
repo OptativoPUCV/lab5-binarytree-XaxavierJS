@@ -118,3 +118,8 @@ treemap.c:93:13: error: unused variable ‘toDelete’ [-Werror=unused-variable]
 cc1: all warnings being treated as errors
 Compilation failed
 1f3169b
+Sun 12 May 2024 12:23:48 AM UTC: 
+ treemap.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+ tests:  0|0
+bdfd9bc
