@@ -87,33 +87,62 @@ TreeNode *minimum(TreeNode *x) {
 }
 
 void removeNode(TreeMap *tree, TreeNode *node) {
-  if (node == NULL)
+  if (node == NULL){
     return;
-
-  if (node->left != NULL && node->right != NULL) {
-    TreeNode *successor = minimum(node->right);
-    node->pair = successor->pair;
-    node = successor;
   }
-
-  TreeNode *child = (node->left != NULL) ? node->left : node->right;
-
-  if (child != NULL)
-    child->parent = node->parent;
-
-  if (node->parent == NULL)
-    tree->root = child;
-  else if (node == node->parent->left)
-    node->parent->left = child;
-  else
-    node->parent->right = child;
-
-  if (tree->root != NULL && tree->root->left == NULL &&
-      tree->root->right == NULL)
-    tree->root = NULL;
-
-  free(node->pair);
-  free(node);
+  if (node->left == NULL && node->right == NULL){
+    if (node->parent == NULL){
+      tree->root = NULL;
+      
+    }
+    else{
+      if (node->parent->left == node){
+        node->parent->left = NULL;
+        
+      }
+      else{
+        node->parent->right = NULL;
+        
+      }
+      
+    }
+    free(node->pair->key);
+    free(node->pair->value);
+    free(node->pair);
+  }
+  else{
+    if (node->left != NULL && node->right != NULL){
+      TreeNode *min = minimum(node->right);
+      node->pair->key = min->pair->key;
+      node->pair->value = min->pair->value;
+      removeNode(tree, min);
+    }
+    else{
+      TreeNode *child = (node->left != NULL) ? node->left : node->right;
+      if (node->parent == NULL){
+        tree->root = child;
+        
+      }
+      else{
+        if (node->parent->left == node){
+          node->parent->left = child;
+          
+        }
+        else{
+          node->parent->right = child;
+          
+        }
+        
+      }
+      child->parent = node->parent;
+      free(node->pair->key);
+      free(node->pair->value);
+      free(node->pair);
+      
+    }
+    
+  }
+  
 }
 
 void eraseTreeMap(TreeMap *tree, void *key) {
@@ -166,19 +195,20 @@ Pair *firstTreeMap(TreeMap *tree) {
   return aux->pair;
 }
 
-Pair *nextTreeMap(TreeMap *tree) {
+Pair *nextTreeMap(TreeMap *tree) { 
   TreeNode *aux = tree->current;
-  if (aux->right != NULL) {
+  if (aux->right != NULL){
     tree->current = minimum(aux->right);
     return tree->current->pair;
   }
   TreeNode *parent = aux->parent;
-  while (parent != NULL && aux == parent->right) {
+  while (parent != NULL && aux == parent->right){
     aux = parent;
     parent = parent->parent;
+    
   }
   tree->current = parent;
-  if (parent != NULL) {
+  if (parent != NULL){
     return parent->pair;
   }
   return NULL;
