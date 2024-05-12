@@ -148,4 +148,21 @@ Pair *firstTreeMap(TreeMap *tree) {
   return aux->pair;
 }
 
-Pair *nextTreeMap(TreeMap *tree) { return NULL; }
+Pair *nextTreeMap(TreeMap *tree) { 
+  TreeNode *aux = tree->current;
+  if (aux->right != NULL){
+    tree->current = minimum(aux->right);
+    return tree->current->pair;
+  }
+  TreeNode *parent = aux->parent;
+  while (parent != NULL && aux == parent->right){
+    aux = parent;
+    parent = parent->parent;
+    
+  }
+  tree->current = parent;
+  if (parent != NULL){
+    return parent->pair;
+  }
+  return NULL;
+}
